@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
+        classpath 'com.android.tools.build:gradle:7.0.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -33,13 +33,13 @@ ext {
     navigation_ui_ktx_version = "2.3.5"
     coroutines_core_version = "1.5.0"
     coroutines_android_version = "1.5.0"
-    lifecycle_version = "2.4.0-rc01"
+    lifecycle_version = "2.3.1"
     hilt_version = "2.38.1"
     hilt_work_version = "1.0.0"
     retrofit_version  = "2.9.0"
     converter_gson_version = "2.9.0"
     okhttp_version = "4.9.0"
     room_version = "2.3.0"
-    room_paging_version = "2.4.0-alpha05"
+    room_paging_version = "2.4.0-alpha04"
 
 }

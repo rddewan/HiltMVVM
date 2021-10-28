@@ -5,7 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.richarddewan.hiltmvvm.data.local.entity.TaskLocalEntity
 import com.richarddewan.hiltmvvm.databinding.ActivityMainBinding
 import com.richarddewan.hiltmvvm.ui.TaskViewModel
@@ -17,17 +22,15 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var taskAdaptor: TaskAdaptor
-    @Inject
-    lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var bottomNav: BottomNavigationView
+    private lateinit var navController: NavController
+    private lateinit var navHostFragment: NavHostFragment
 
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding
         get() = _binding!!
 
-    private val viewModel: TaskViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,48 +38,19 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding!!.root)
 
-        //setup rv
-        binding.rvTask.apply {
-            layoutManager = linearLayoutManager
-            adapter = taskAdaptor
-        }
+        bottomNav = binding.bottomNavigationView
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.navController
+        bottomNav.setupWithNavController(navController)
+        NavigationUI.setupActionBarWithNavController(this,navController)
 
-        //observe the live data
-        setObservers()
-        viewModel.setTasState(TaskEvent.GetTask)
+
     }
 
-    private fun setObservers() {
-        viewModel.state.observe(this, {
-            when(it) {
-                is ResultState.Loading -> {
-                    setProgressbar(true)
-                }
-                is ResultState.Success -> {
-                    setTaskList(it.data)
-                    setProgressbar(false)
-                }
-                is ResultState.Error -> {
-                    setError(it.exception.message)
-                    setProgressbar(false)
-                }
-            }
-        })
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
     }
 
-    private fun setTaskList(tasks: List<TaskLocalEntity>) {
-        taskAdaptor.setData(tasks)
-    }
-
-    private fun setError(error: String?){
-        error?.let {
-            Toast.makeText(this,it,Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun setProgressbar(isShown: Boolean) {
-        binding.progressBar.visibility = if (isShown) View.VISIBLE else View.GONE
-    }
 
     override fun onDestroy() {
         super.onDestroy()

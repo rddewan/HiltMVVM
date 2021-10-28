@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidUdemyCourse/Hilt/HiltMVVM/app/src/main/res/layout/activity_main.xml" value="0.35989583333333336" />
-        <entry key="..\:/AndroidUdemyCourse/Hilt/HiltMVVM/app/src/main/res/layout/fragment_add.xml" value="0.35989583333333336" />
+        <entry key="..\:/AndroidUdemyCourse/Hilt/HiltMVVM/app/src/main/res/layout/fragment_add.xml" value="0.25" />
         <entry key="..\:/AndroidUdemyCourse/Hilt/HiltMVVM/app/src/main/res/layout/fragment_home.xml" value="0.35989583333333336" />
         <entry key="..\:/AndroidUdemyCourse/Hilt/HiltMVVM/app/src/main/res/layout/fragment_profile.xml" value="0.35989583333333336" />
         <entry key="..\:/AndroidUdemyCourse/Hilt/HiltMVVM/app/src/main/res/layout/task_item_view.xml" value="0.35989583333333336" />
+        <entry key="..\:/AndroidUdemyCourse/Hilt/HiltMVVM/app/src/main/res/menu/bottom_menu.xml" value="0.35989583333333336" />
       </map>
     </option>
   </component>
